@@ -46,8 +46,8 @@ public class ImpresorLCD {
      * @param size Tamaño Segmento
      * @param caracter Caracter Segmento
      */    
-    private void adicionarLinea(String[][] matriz, int[] punto, String posFija,
-            int size, String caracter) {
+    private void adicionarLinea(String[][] matriz, int[] punto, 
+        String posFija,int size, String caracter) {
 
         if (posFija.equalsIgnoreCase(POSICION_X)) 
         {
@@ -210,8 +210,7 @@ public class ImpresorLCD {
      * @param numeroImp Numero a Imprimir
      * @param espacio Espacio Entre digitos
      */    
-    private void imprimirNumero(int size, String numeroImp, int espacio) 
-    {
+    private void imprimirNumero(int size, String numeroImp, int espacio) {
         int pivotX = 0;
         char[] digitos;
 
