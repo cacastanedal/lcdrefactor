@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ImpresorLCD {
 
     // Puntos fijos
@@ -16,6 +19,8 @@ public class ImpresorLCD {
     static final String CARACTER_HORIZONTAL = "-";
     static final String POSICION_X = "X";
     static final String POSICION_Y = "Y";
+
+    private HashMap<Integer,int[]> segmentosNumero = new HashMap<Integer,int[]>();
 
     // TODO code application logic here
     //String entrada = JOptionPane.showInputDialog("Digite el numero");
@@ -34,6 +39,37 @@ public class ImpresorLCD {
         this.pf3 = new int[2];
         this.pf4 = new int[2];
         this.pf5 = new int[2];
+
+        int[] oneSegments = {3,4};
+        segmentosNumero.put(1, oneSegments );
+
+        int[] twoSegments = {5,3,6,2,7};
+        segmentosNumero.put(2, twoSegments );
+
+        int[] threeSegments = {5,3,6,4,7};
+        segmentosNumero.put(3, threeSegments );
+
+        int[] fourSegments = {1,6,3,4};
+        segmentosNumero.put(4, fourSegments );
+
+        int[] fiveSegments = {5,1,6,4,7};
+        segmentosNumero.put(5, fiveSegments );
+
+        int[] sixSegments = {5,1,6,2,7,4};
+        segmentosNumero.put(6, sixSegments );
+
+        int[] sevenSegments = {5,3,4};
+        segmentosNumero.put(7, sevenSegments );
+
+        int[] eightSegments = {1,2,3,4,5,6,7};
+        segmentosNumero.put(8, eightSegments );
+
+
+        int[] nineSegments = {1,3,4,5,6,7};
+        segmentosNumero.put(9, nineSegments );
+
+        int[] zeroSegments = {1,2,3,4,5,7};
+        segmentosNumero.put(0, zeroSegments );        
     }
 
     /**
@@ -121,78 +157,8 @@ public class ImpresorLCD {
         // Establece los segmentos de cada numero
         List<Integer> segList = new ArrayList<>();
 
-        switch (numero) {
-            case 1:
-                segList.add(3);
-                segList.add(4);
-                break;
-            case 2:
-                segList.add(5);
-                segList.add(3);
-                segList.add(6);
-                segList.add(2);
-                segList.add(7);
-                break;
-            case 3:
-                segList.add(5);
-                segList.add(3);
-                segList.add(6);
-                segList.add(4);
-                segList.add(7);
-                break;
-            case 4:
-                segList.add(1);
-                segList.add(6);
-                segList.add(3);
-                segList.add(4);
-                break;
-            case 5:
-                segList.add(5);
-                segList.add(1);
-                segList.add(6);
-                segList.add(4);
-                segList.add(7);
-                break;
-            case 6:
-                segList.add(5);
-                segList.add(1);
-                segList.add(6);
-                segList.add(2);
-                segList.add(7);
-                segList.add(4);
-                break;
-            case 7:
-                segList.add(5);
-                segList.add(3);
-                segList.add(4);
-                break;
-            case 8:
-                segList.add(1);
-                segList.add(2);
-                segList.add(3);
-                segList.add(4);
-                segList.add(5);
-                segList.add(6);
-                segList.add(7);
-                break;
-            case 9:
-                segList.add(1);
-                segList.add(3);
-                segList.add(4);
-                segList.add(5);
-                segList.add(6);
-                segList.add(7);
-                break;
-            case 0:
-                segList.add(1);
-                segList.add(2);
-                segList.add(3);
-                segList.add(4);
-                segList.add(5);
-                segList.add(7);
-                break;
-            default:
-                break;
+        for (int i = 0; i < segmentosNumero.get(numero).length; i++) {
+            segList.add(segmentosNumero.get(numero)[i]);
         }
 
         Iterator<Integer> iterator = segList.iterator();
