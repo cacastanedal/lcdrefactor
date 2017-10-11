@@ -73,36 +73,36 @@ public class ImpresorLCD {
      *
      * @param segmento Segmento a adicionar
      */  
-    private void adicionarSegmento(int segmento, String[][] matrizImpr) {
+    private void adicionarSegmento(int segmento, String[][] matrizImpr, int size) {
 
         switch (segmento) {
             case 1:
                 adicionarLinea(matrizImpr, this.pf1, POSICION_Y,
-                        this.size, CARACTER_VERTICAL);
+                        size, CARACTER_VERTICAL);
                 break;
             case 2:
                 adicionarLinea(matrizImpr, this.pf2, POSICION_Y,
-                        this.size, CARACTER_VERTICAL);
+                        size, CARACTER_VERTICAL);
                 break;
             case 3:
                 adicionarLinea(matrizImpr, this.pf5, POSICION_Y,
-                        this.size, CARACTER_VERTICAL);
+                        size, CARACTER_VERTICAL);
                 break;
             case 4:
                 adicionarLinea(matrizImpr, this.pf4, POSICION_Y,
-                        this.size, CARACTER_VERTICAL);
+                        size, CARACTER_VERTICAL);
                 break;
             case 5:
                 adicionarLinea(matrizImpr, this.pf1, POSICION_X,
-                        this.size, CARACTER_HORIZONTAL);
+                        size, CARACTER_HORIZONTAL);
                 break;
             case 6:
                 adicionarLinea(matrizImpr, this.pf2, POSICION_X,
-                        this.size, CARACTER_HORIZONTAL);
+                        size, CARACTER_HORIZONTAL);
                 break;
             case 7:
                 adicionarLinea(matrizImpr, this.pf3, POSICION_X,
-                        this.size, CARACTER_HORIZONTAL);
+                        size, CARACTER_HORIZONTAL);
                 break;
             default:
                 break;
@@ -116,7 +116,7 @@ public class ImpresorLCD {
      *
      * @param numero Digito
      */
-    private void adicionarDigito(int numero, String[][] matrizImpr) {
+    private void adicionarDigito(int numero, String[][] matrizImpr, int size) {
 
         // Establece los segmentos de cada numero
         List<Integer> segList = new ArrayList<>();
@@ -198,7 +198,7 @@ public class ImpresorLCD {
         Iterator<Integer> iterator = segList.iterator();
 
         while (iterator.hasNext()) {
-            adicionarSegmento(iterator.next(), matrizImpr);
+            adicionarSegmento(iterator.next(), matrizImpr, size);
         }
     }
 
@@ -215,13 +215,11 @@ public class ImpresorLCD {
 
         String[][] matrizImpr;
 
-        this.size = size;
-
         // Calcula el numero de filas cada digito
-        this.filasDig = (2 * this.size) + 3;
+        this.filasDig = (2 * size) + 3;
 
         // Calcula el numero de columna de cada digito
-        this.columDig = this.size + 2;
+        this.columDig = size + 2;
 
         // Calcula el total de filas de la matriz en la que se almacenaran los digitos
         this.totalFilas = this.filasDig;
@@ -244,7 +242,7 @@ public class ImpresorLCD {
      * @param numeroImp Numero a Imprimir
      * @param espacio Espacio Entre digitos
      */    
-    private void imprimirNumero(String numeroImp, int espacio, String[][] matrizImpr) {
+    private void imprimirNumero(int size, String numeroImp, int espacio, String[][] matrizImpr) {
         int pivotX = 0;
         char[] digitos;
 
@@ -287,7 +285,7 @@ public class ImpresorLCD {
 
             pivotX = pivotX + this.columDig + espacio;
 
-            adicionarDigito(numero, matrizImpr);
+            adicionarDigito(numero, matrizImpr, size);
         }
 
         // Imprime matriz
@@ -358,7 +356,7 @@ public class ImpresorLCD {
         matrizImpr = construirMatriz(tam, parametros[1],espacioDig);
 
         // Realiza la impresion del numero
-        imprimirNumero(parametros[1],espacioDig, matrizImpr);
+        imprimirNumero(tam, parametros[1],espacioDig, matrizImpr);
 
     }
 
