@@ -204,16 +204,14 @@ public class ImpresorLCD {
 
     /**
      *
-     * Metodo encargado de imprimir un numero
+     * Metodo encargado de construir el espacio para imprimir un numero
      *
      * @param size Tamaño Segmento Digitos
      * @param numeroImp Numero a Imprimir
      * @param espacio Espacio Entre digitos
      */    
-    private void imprimirNumero(int size, String numeroImp, int espacio) {
-        int pivotX = 0;
-        char[] digitos;
 
+    private void construirMatriz(int size, String numeroImp, int espacio){
         this.size = size;
 
         // Calcula el numero de filas cada digito
@@ -231,6 +229,19 @@ public class ImpresorLCD {
 
         // crea matriz para almacenar los numero a imprimir
         this.matrizImpr = new String[this.totalFilas][this.totalColum];
+    }
+
+    /**
+     *
+     * Metodo encargado de imprimir un numero
+     *
+     * @param size Tamaño Segmento Digitos
+     * @param numeroImp Numero a Imprimir
+     * @param espacio Espacio Entre digitos
+     */    
+    private void imprimirNumero(String numeroImp, int espacio) {
+        int pivotX = 0;
+        char[] digitos;
 
         // crea el arreglo de digitos
         digitos = numeroImp.toCharArray();
@@ -338,8 +349,11 @@ public class ImpresorLCD {
                     + "] no es un numero");
         }
 
+        // Construir el espacio de imprecion
+        construirMatriz(tam, parametros[1],espacioDig);
+
         // Realiza la impresion del numero
-        imprimirNumero(tam, parametros[1],espacioDig);
+        imprimirNumero(parametros[1],espacioDig);
 
     }
 
