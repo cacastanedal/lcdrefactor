@@ -19,13 +19,13 @@ public class ImpresorLCD {
 
     // TODO code application logic here
     //String entrada = JOptionPane.showInputDialog("Digite el numero");
-    private int size;
+    //private int size;
 
     // Calcula el numero de filasDig
-    private int filasDig;
-    private int columDig;
-    private int totalFilas;
-    private int totalColum;
+    //private int filasDig;
+    //private int columDig;
+    //private int totalFilas;
+    //private int totalColum;
 
     public ImpresorLCD() {
         // Inicializa variables
@@ -215,21 +215,42 @@ public class ImpresorLCD {
 
         String[][] matrizImpr;
 
+        int filasDig;
+        int columDig;
+        int totalColum;
+        int totalFilas;
+
         // Calcula el numero de filas cada digito
-        this.filasDig = (2 * size) + 3;
+        filasDig = (2 * size) + 3;
 
         // Calcula el numero de columna de cada digito
-        this.columDig = size + 2;
+        columDig = size + 2;
 
         // Calcula el total de filas de la matriz en la que se almacenaran los digitos
-        this.totalFilas = this.filasDig;
+        totalFilas = filasDig;
 
         // Calcula el total de columnas de la matriz en la que se almacenaran los digitos
-        this.totalColum = (this.columDig * numeroImp.length())
+        totalColum = (columDig * numeroImp.length())
                 + (espacio * numeroImp.length());
 
         // crea matriz para almacenar los numero a imprimir
-        matrizImpr = new String[this.totalFilas][this.totalColum];
+        matrizImpr = new String[totalFilas][totalColum];
+
+
+        /* How to access size of matriz through matriz itself
+        totalFilas
+        matrizImpr.length
+
+        totalColum
+        matrizImpr[0].length;
+
+        filasDig
+        matrizImpr.length
+
+        columDig
+        ((totalColum - (espacio * numeroImp.length()))/numeroImp.length())
+
+        */
 
         return matrizImpr;
     }
@@ -246,12 +267,17 @@ public class ImpresorLCD {
         int pivotX = 0;
         char[] digitos;
 
+        int totalFilas = matrizImpr.length;
+        int totalColum = matrizImpr[0].length;
+        int filasDig = matrizImpr.length;
+        int columDig = ((totalColum - (espacio * numeroImp.length()))/numeroImp.length());
+
         // crea el arreglo de digitos
         digitos = numeroImp.toCharArray();
 
         // Inicializa matriz
-        for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColum; j++) {
+        for (int i = 0; i < totalFilas; i++) {
+            for (int j = 0; j < totalColum; j++) {
                 matrizImpr[i][j] = " ";
             }
         }
@@ -271,26 +297,26 @@ public class ImpresorLCD {
             this.pf1[0] = 0;
             this.pf1[1] = 0 + pivotX;
 
-            this.pf2[0] = (this.filasDig / 2);
+            this.pf2[0] = (filasDig / 2);
             this.pf2[1] = 0 + pivotX;
 
-            this.pf3[0] = (this.filasDig - 1);
+            this.pf3[0] = (filasDig - 1);
             this.pf3[1] = 0 + pivotX;
 
-            this.pf4[0] = (this.columDig - 1);
-            this.pf4[1] = (this.filasDig / 2) + pivotX;
+            this.pf4[0] = (columDig - 1);
+            this.pf4[1] = (filasDig / 2) + pivotX;
 
             this.pf5[0] = 0;
-            this.pf5[1] = (this.columDig - 1) + pivotX;
+            this.pf5[1] = (columDig - 1) + pivotX;
 
-            pivotX = pivotX + this.columDig + espacio;
+            pivotX = pivotX + columDig + espacio;
 
             adicionarDigito(numero, matrizImpr, size);
         }
 
         // Imprime matriz
-        for (int i = 0; i < this.totalFilas; i++) {
-            for (int j = 0; j < this.totalColum; j++) {
+        for (int i = 0; i < totalFilas; i++) {
+            for (int j = 0; j < totalColum; j++) {
                 System.out.print(matrizImpr[i][j]);
             }
             System.out.println();
